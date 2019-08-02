@@ -1,8 +1,10 @@
 body {
     background-color: #284b5b;
+    color: white;
 }
-header,
-main,
-footer {
-    border: 1px dotted yellow;
+.header,
+.main-content,
+.footer {
+    border: 2px dotted yellow;
+    box-sizing: border-box;
 }

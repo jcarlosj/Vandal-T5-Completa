@@ -49,26 +49,60 @@ window .onload = () => {
         }
     } /** Final class Element */
 
-    /** Agrega elementos: header, main y footer al body */
-    function createBodyElements () {
-        let $body = Element .get( 'body' ),
-            $els = new Array( 'footer', 'main', 'header' );
-            //console .log( $body );
+    class DOM {
+        constructor( $body ) {
+            this .$body = $body;
+            this .$body .setAttribute( 'class', 'd-flex flex-column' );
 
-        $els .forEach( item => {
+            this .$header = this .$body .children[ 0 ];
+            this .$main = this .$body .children[ 1 ];
+            this .$footer = this .$body .children[ 2 ];
+        }
+        /** Agrega elementos: header, main y footer al body */
+        createChildrenElementsBy( $parentEl, structure ) {
+            let listEl = new Array();
+
+            // Itera por ID (1er Nivel de Profundidad del Objeto)
+            for ( let element in structure ) {
+
+                // Valida que el element exista dentro del Objeto iterado
+                if ( structure .hasOwnProperty( element ) ) {
+                    let properties = Object .getOwnPropertyNames( structure[ element ] );    // Obtiene todas las propiedades existentes del objeto
+
+                    console .group( `element = ${ element }` );
+
+                    // Itera propiedades (2do Nivel de Profundidad del Objeto)
+                    properties .forEach( property => {
+                        let id = property,
+                            classes = structure[ element ][ property ],
+                            $el = Element .create( element, classes, id );
+                            $el .appendChild( document .createTextNode( element ) );
+                           
+                        $parentEl .insertBefore( $el, $parentEl .firstElementChild );   // Inserta elementos: header, div, footer al body
+
+                        console .log( `id: ${ property }` );
+                        console .log( `class: ${ structure[ element ][ property ] }` );
+                    });
             
-            let $el = Element .create( item, [ item ] );
-            $body .insertBefore( $el, $body .firstElementChild ); 
-        });
+                    console .groupEnd();
+                }
+            }
 
-        return $body;
+            return $parentEl;
+        }
     }
 
-    let $body = createBodyElements(),
-        $header = $body .children[ 0 ],
-        $main = $body .children[ 1 ],
-        $footer = $body .children[ 2 ];
-   
-    console .log( $header, $main, $footer );
+    let bodyStructure = { 
+        'header': { 'header': [ 'header', 'order-1' ] },
+        'div': { 'main-content': [ 'main-content', 'order-2' ] },
+        'footer': { 'footer': [ 'footer', 'order-3' ] } 
+    } 
+
+    let $body = Element .get( 'body' );
+    let dom = new DOM( $body );
+    
+    $body = dom .createChildrenElementsBy( $body, bodyStructure );
+
+    console .log( $body );
 
 }   
