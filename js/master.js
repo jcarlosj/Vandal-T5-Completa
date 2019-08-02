@@ -8,8 +8,11 @@ window .onload = () => {
         $body .insertBefore( $main, $body .firstElementChild );
         $body .insertBefore( $header, $body .firstElementChild );
 
-        $header .appendChild( createEl( 'div', [ 'top' ] ) );
-        $header .appendChild( createEl( 'div', [ 'bottom' ] ) );
+        $header .appendChild( createEl( 'div', [ 'header-top' ] ) );
+        $header .appendChild( createEl( 'div', [ 'header-bottom' ] ) );
+        
+        var hb = $header .lastChild;
+        hb .appendChild( createNavbar() );
 
         $main .appendChild( createEl( 'section', [ 'section', 'container', 'games' ] ) );
         $main .appendChild( createEl( 'section', [ 'section', 'container', 'news' ] ) );
@@ -46,13 +49,14 @@ window .onload = () => {
             $button = addAttributes( $button, attributesButton );
             $nav .appendChild( $button );
 
-        console .log( $nav );
-        
+        //console .log( $nav );
+
+        return $nav;
     }
     function createButton() {
         let $button = createEl( 'button', [ 'navbar-toggler' ] );
 
-        console .log( $button );
+        //console .log( $button );
         return $button;
     }
     function addAttributes( $el, attributes ) {
@@ -74,5 +78,5 @@ window .onload = () => {
         return $el;
     }
 
-    console .log( createNavbar() );
+    //console .log( createNavbar() );
 }
