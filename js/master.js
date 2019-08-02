@@ -33,15 +33,17 @@ window .onload = () => {
     function createNavbar() {
         let items = new Array( 'Portada', 'Noticias', 'Análisis', 'Juegos', 'Guías', 'PC', 'PS4', 'XBOne', 'Switch', 'Plataformas', 'Podcast', 'Foro', 'eSports', 'Hardware', 'Random' ),
             $nav = createEl( 'nav', [ 'navbar', 'navbar-expand-lg', 'navbar-light', 'bg-light' ] ),
-            $button = createButton();
+            $button = createButton(),
+            attributesButton = {
+                'type': 'button',
+                'data-toggle': 'collapse',
+                'data-target': '#main-menu',
+                'aria-controls': 'navbarNavAltMarkup',
+                'aria-expanded': 'false',
+                'aria-label': 'Toggle navigation'
+            };
 
-            $button .setAttribute( 'type', 'button' );
-            $button .setAttribute( 'data-toggle', 'collapse' );
-            $button .setAttribute( 'data-target', '#main-menu' );
-            $button .setAttribute( 'aria-controls', 'navbarNavAltMarkup' ), 
-            $button .setAttribute( 'aria-expanded', 'false' ), 
-            $button .setAttribute( 'aria-label', 'Toggle navigation' ), 
-            
+            $button = addAttributes( $button, attributesButton );
             $nav .appendChild( $button );
 
         console .log( $nav );
@@ -53,5 +55,24 @@ window .onload = () => {
         console .log( $button );
         return $button;
     }
+    function addAttributes( $el, attributes ) {
+        for ( let attr in attributes ) {
+
+            // Valida que el attr exista dentro del Objeto iterado
+            if ( attributes .hasOwnProperty( attr ) ) {
+                let properties = Object .getOwnPropertyNames( attributes );   
+                //console .log( properties );
+
+                // Itera propiedades (2do Nivel de Profundidad del Objeto)
+                properties .forEach( property => {
+                    // console .log( `${ property } = ${ attributes[ property ] }` );
+                    $el .setAttribute( property, attributes[ property ] );
+                });
+            }
+        }
+
+        return $el;
+    }
+
     console .log( createNavbar() );
 }
