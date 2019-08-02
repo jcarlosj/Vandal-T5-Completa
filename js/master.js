@@ -19,7 +19,7 @@ window .onload = () => {
         
     console .log( $body );
 
-    /** Funtions */
+    /** Crea elemento */
     function createEl( el, classes = null, id = null ) {
         let $el = document .createElement( el );
     
@@ -78,6 +78,7 @@ window .onload = () => {
         //console .log( $button );
         return $button;
     }
+    /** Agrega Atributos a un Elemento */
     function addAttributes( $el, attributes ) {
         for ( let attr in attributes ) {
 
@@ -96,6 +97,18 @@ window .onload = () => {
 
         return $el;
     }
+    /** Anida un Elemento a otro */
+    function toAnidateElement( $parentEl, $childEl ) {
+        $parentEl .appendChild( $childEl );
+        return $parentEl;
+    }
 
-    //console .log( createNavbar() );
-}
+    var $testEl_1 = document .createElement( 'div' ),
+        $testEl_2 = document .createElement( 'div' );
+
+    $testEl_1 .setAttribute( 'class', 'main' );
+    $testEl_2 .setAttribute( 'class', 'secondary' );
+
+    $testEl_1 = toAnidateElement( $testEl_1, $testEl_2 );
+    console .log( $testEl_1 );
+}   
