@@ -1,3 +1,8 @@
 body {
     background-color: #284b5b;
 }
+header,
+main,
+footer {
+    border: 1px dotted yellow;
+}
