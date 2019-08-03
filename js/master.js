@@ -93,12 +93,17 @@ window .onload = () => {
     let html = { 
         'body': [
             { 'tag': 'header', 'id': null, 'class': [ 'header', 'order-1' ] },
-            { 'tag': 'div', 'id': null, 'class': [ 'main-content', 'order-2' ] },
+            { 'tag': 'main', 'id': null, 'class': [ 'main-content', 'order-2' ] },
             { 'tag': 'footer', 'id': null, 'class': [ 'footer', 'order-3' ] }
         ],
         'header': [
             { 'tag': 'div', 'id': null, 'class': [ 'container', 'header-top' ] },
             { 'tag': 'div', 'id': null, 'class': [ 'container', 'header-bottom' ] }
+        ],
+        'main': [
+            { 'tag': 'section', 'id': null, 'class': [ 'container', 'ads' ] },
+            { 'tag': 'section', 'id': null, 'class': [ 'container', 'games' ] },
+            { 'tag': 'section', 'id': null, 'class': [ 'container', 'news' ] }
         ]
     };
 
@@ -109,6 +114,9 @@ window .onload = () => {
     $body = dom .createChildrenElementsBy( $body, html .body );
     $header = $body .children[ 2 ];
     $header = dom .createChildrenElementsBy( $header, html .header );
+    $main = $body .children[ 1 ];
+    $main = dom .createChildrenElementsBy( $main, html .main );
+    
 
     console .log( $body );
 
