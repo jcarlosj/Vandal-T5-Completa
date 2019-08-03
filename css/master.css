@@ -19,3 +19,7 @@ body {
 .header-bottom {
     background-color: white;
 }
+
+.main-menu .nav-link {
+    padding: .5rem .7rem;
+}

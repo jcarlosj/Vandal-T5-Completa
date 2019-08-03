@@ -90,8 +90,9 @@ window .onload = () => {
             return $parentEl;
         }
         /** Agrega enlaces a una lista */
-        createChildrenLiA( $ul, structure ) {
-            let listEl = new Array(); 
+        createChildrenLiA( $ul, structure, generic_clases = null ) {
+            let listEl = new Array(),
+                li_classes = null; 
             //console .log( structure );
 
             // Itera por ID (1er Nivel de Profundidad del Objeto)
@@ -99,22 +100,33 @@ window .onload = () => {
 
                 // Valida que el element exista dentro del Objeto iterado
                 if ( structure .hasOwnProperty( element ) ) {
-                    console .group( `elements = li > a ` );
-                    console .log( `class = ${ structure[ element ] .class }` );
-                    console .log( `text = ${ structure[ element ] .text }` );
-                    console .log( `urk = ${ structure[ element ] .url }` );
+                    //console .group( `elements = li > a ` );
+                    //console .log( `class = ${ structure[ element ] .class }` );
+                    //console .log( `text = ${ structure[ element ] .text }` );
+                    //console .log( `urk = ${ structure[ element ] .url }` );
+
+                    if( Array .isArray( generic_clases ) ) {
+                        
+                        if( Array .isArray( generic_clases[ 0 ] ) && generic_clases[ 0 ] != '' && generic_clases[ 0 ] != null && generic_clases[ 0 ] != 'undefined' ) {
+                            li_classes = generic_clases[ 0 ];
+                        }
+                        if( Array .isArray( generic_clases[ 1 ] ) && generic_clases[ 1 ] != '' && generic_clases[ 1 ] != null && generic_clases[ 1 ] != 'undefined' ) {
+                            structure[ element ] .class = structure[ element ] .class .concat( generic_clases[ 1 ] );
+                        }
+                    }
 
                     let properties = Object .getOwnPropertyNames( structure[ element ] );           // Obtiene todas las propiedades existentes del objeto
-                        let $li = Element .create(                                                      // Crea elemento con sus id y clases
-                                'li', 
-                                structure[ element ] .class, 
-                                structure[ element ] .id 
-                            ),
-                            $a = Element .create(                                                      // Crea elemento con sus id y clases
-                                'a', 
-                                structure[ element ] .class, 
-                                structure[ element ] .id 
-                            );
+
+                    let $li = Element .create(                                                      // Crea elemento con sus id y clases
+                            'li', 
+                            li_classes, 
+                            structure[ element ] .id 
+                        ),
+                        $a = Element .create(                                                      // Crea elemento con sus id y clases
+                            'a', 
+                            structure[ element ] .class, 
+                            structure[ element ] .id 
+                        );
                     
                     $a .appendChild( document .createTextNode( structure[ element ] .text ) );  
                     $li .appendChild( $a );
@@ -186,10 +198,10 @@ window .onload = () => {
     $footer = dom .createChildrenElementsBy( $footer, html .footer );
     
     $navMenuMain = $header .children[ 0 ];
-    $navMenuMain = Element .toAnidateElement( $navMenuMain, Element .create( 'ul', [ 'main-menu' ], null ) );
+    $navMenuMain = Element .toAnidateElement( $navMenuMain, Element .create( 'ul', [ 'nav', 'main-menu' ], null ) );
     $ulMenuMain = $navMenuMain .children[ 0 ];
     
-    $ulMenuMain = dom .createChildrenLiA( $ulMenuMain, data .menu_main );
+    $ulMenuMain = dom .createChildrenLiA( $ulMenuMain, data .menu_main, [ [ 'nav-item' ], [ 'nav-link', 'active' ] ] );
     console .log( 'Atacando', $ulMenuMain );
 
     console .log( $body );
