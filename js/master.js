@@ -103,7 +103,7 @@ window .onload = () => {
                     //console .group( `elements = li > a ` );
                     //console .log( `class = ${ structure[ element ] .class }` );
                     //console .log( `text = ${ structure[ element ] .text }` );
-                    //console .log( `urk = ${ structure[ element ] .url }` );
+                    //console .log( `url = ${ structure[ element ] .url }` );
 
                     if( Array .isArray( generic_clases ) ) {
                         
@@ -116,7 +116,6 @@ window .onload = () => {
                     }
 
                     let properties = Object .getOwnPropertyNames( structure[ element ] );           // Obtiene todas las propiedades existentes del objeto
-
                     let $li = Element .create(                                                      // Crea elemento con sus id y clases
                             'li', 
                             li_classes, 
@@ -128,6 +127,7 @@ window .onload = () => {
                             structure[ element ] .id 
                         );
                     
+                    $a = Element .addAttributes( $a, { 'href': structure[ element ] .url } );
                     $a .appendChild( document .createTextNode( structure[ element ] .text ) );  
                     $li .appendChild( $a );
                     $ul .appendChild( $li );                   
