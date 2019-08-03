@@ -58,18 +58,19 @@ window .onload = () => {
             this .$main = this .$body .children[ 1 ];
             this .$footer = this .$body .children[ 2 ];
         }
-        /** Agrega elementos: header, main y footer al body */
+        /** Agrega elementos */
         createChildrenElementsBy( $parentEl, structure ) {
-            let listEl = new Array(); console .log( structure );
+            let listEl = new Array(); 
+            //console .log( structure );
 
             // Itera por ID (1er Nivel de Profundidad del Objeto)
             for ( let element in structure ) {
 
                 // Valida que el element exista dentro del Objeto iterado
                 if ( structure .hasOwnProperty( element ) ) {
-                    console .group( `element = ${ structure[ element ] .tag }` );
-                    console .log( `id = ${ structure[ element ] .id }` );
-                    console .log( `class = ${ structure[ element ] .class }` );
+                    //console .group( `element = ${ structure[ element ] .tag }` );
+                    //console .log( `id = ${ structure[ element ] .id }` );
+                    //console .log( `class = ${ structure[ element ] .class }` );
 
                     let properties = Object .getOwnPropertyNames( structure[ element ] ),           // Obtiene todas las propiedades existentes del objeto
                         $el = Element .create(                                                      // Crea elemento con sus id y clases
@@ -80,7 +81,7 @@ window .onload = () => {
 
                     $el .appendChild( document .createTextNode( structure[ element ] .tag ) );      // TEMPORAL: Solo para poner el nombre del elemento dentro del elemento
                     $parentEl .insertBefore( $el, $parentEl .firstElementChild );                   // Inserta elementos: header, div, footer al body
-                    console .log( $parentEl );
+                    //console .log( $parentEl );
             
                     console .groupEnd();
                 }
@@ -88,17 +89,56 @@ window .onload = () => {
 
             return $parentEl;
         }
+        /** Agrega enlaces a una lista */
+        createChildrenLiA( $ul, structure ) {
+            let listEl = new Array(); 
+            //console .log( structure );
+
+            // Itera por ID (1er Nivel de Profundidad del Objeto)
+            for ( let element in structure ) {
+
+                // Valida que el element exista dentro del Objeto iterado
+                if ( structure .hasOwnProperty( element ) ) {
+                    console .group( `elements = li > a ` );
+                    console .log( `class = ${ structure[ element ] .class }` );
+                    console .log( `text = ${ structure[ element ] .text }` );
+                    console .log( `urk = ${ structure[ element ] .url }` );
+
+                    let properties = Object .getOwnPropertyNames( structure[ element ] );           // Obtiene todas las propiedades existentes del objeto
+                        let $li = Element .create(                                                      // Crea elemento con sus id y clases
+                                'li', 
+                                structure[ element ] .class, 
+                                structure[ element ] .id 
+                            ),
+                            $a = Element .create(                                                      // Crea elemento con sus id y clases
+                                'a', 
+                                structure[ element ] .class, 
+                                structure[ element ] .id 
+                            );
+                    
+                    $a .appendChild( document .createTextNode( structure[ element ] .text ) );  
+                    $li .appendChild( $a );
+                    $ul .appendChild( $li );                   
+                    //console .log( $li );
+            
+                    console .groupEnd();
+                }
+            }
+            console .log( $ul );
+
+            //return $ul;
+        }
     }
 
     let html = { 
         'body': [
-            { 'tag': 'header', 'id': null, 'class': [ 'header', 'order-1' ] },
+            { 'tag': 'header', 'id': null, 'class': [ 'header', 'd-flex', 'flex-column', 'order-1' ] },
             { 'tag': 'main', 'id': null, 'class': [ 'main-content', 'order-2' ] },
             { 'tag': 'footer', 'id': null, 'class': [ 'footer', 'order-3' ] }
         ],
         'header': [
-            { 'tag': 'div', 'id': null, 'class': [ 'container', 'header-top' ] },
-            { 'tag': 'div', 'id': null, 'class': [ 'container', 'header-bottom' ] }
+            { 'tag': 'div', 'id': null, 'class': [ 'container', 'header-top', 'order-1' ] },
+            { 'tag': 'nav', 'id': null, 'class': [ 'container', 'header-bottom', 'order-2' ] }
         ],
         'main': [
             { 'tag': 'section', 'id': null, 'class': [ 'container', 'ads' ] },
@@ -109,10 +149,31 @@ window .onload = () => {
             { 'tag': 'section', 'id': null, 'class': [ 'container', 'footer-top' ] },
             { 'tag': 'section', 'id': null, 'class': [ 'container', 'footer-bottom' ] },
             { 'tag': 'section', 'id': null, 'class': [ 'container', 'copyright' ] }
-        ]
+        ],
+        'menu_main': [ { 'tag': 'ul', 'id': null, 'class': [ 'main-menu' ] } ]
     };
 
-    console .log( html .header );
+    let data = {
+        'menu_main' : [
+            { 'text': 'Portada', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'Noticias', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'Análisis', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'Juegos', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'Guías', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'PC', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'PS4', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'XBOne', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'Switch', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'Plataformas', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'Podcast', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'Foro', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'eSports', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'Hardware', 'url': '#', 'class': [ 'link' ] },
+            { 'text': 'Random', 'url': '#', 'class': [ 'link' ] },
+        ]
+    }
+
+    //console .log( html .header );
     let $body = Element .get( 'body' );
     let dom = new DOM( $body );
     
@@ -124,7 +185,14 @@ window .onload = () => {
     $footer = $body .children[ 0 ];
     $footer = dom .createChildrenElementsBy( $footer, html .footer );
     
+    $navMenuMain = $header .children[ 0 ];
+    $navMenuMain = Element .toAnidateElement( $navMenuMain, Element .create( 'ul', [ 'main-menu' ], null ) );
+    $ulMenuMain = $navMenuMain .children[ 0 ];
+    
+    $ulMenuMain = dom .createChildrenLiA( $ulMenuMain, data .menu_main );
+    console .log( 'Atacando', $ulMenuMain );
 
     console .log( $body );
+   
 
-}   
+} 

@@ -1,6 +1,6 @@
 body {
     background-color: #284b5b;
-    color: white;
+    color: orange;
 }
 .header,
 .main-content,
@@ -13,4 +13,9 @@ body {
 .footer section {
     border: 1px dotted blue;
     box-sizing: border-box;
+}
+
+.header-top,
+.header-bottom {
+    background-color: white;
 }
