@@ -104,6 +104,11 @@ window .onload = () => {
             { 'tag': 'section', 'id': null, 'class': [ 'container', 'ads' ] },
             { 'tag': 'section', 'id': null, 'class': [ 'container', 'games' ] },
             { 'tag': 'section', 'id': null, 'class': [ 'container', 'news' ] }
+        ],
+        'footer': [
+            { 'tag': 'section', 'id': null, 'class': [ 'container', 'footer-top' ] },
+            { 'tag': 'section', 'id': null, 'class': [ 'container', 'footer-bottom' ] },
+            { 'tag': 'section', 'id': null, 'class': [ 'container', 'copyright' ] }
         ]
     };
 
@@ -116,6 +121,8 @@ window .onload = () => {
     $header = dom .createChildrenElementsBy( $header, html .header );
     $main = $body .children[ 1 ];
     $main = dom .createChildrenElementsBy( $main, html .main );
+    $footer = $body .children[ 0 ];
+    $footer = dom .createChildrenElementsBy( $footer, html .footer );
     
 
     console .log( $body );

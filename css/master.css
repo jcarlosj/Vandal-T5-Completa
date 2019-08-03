@@ -9,7 +9,8 @@ body {
     box-sizing: border-box;
 }
 .header div,
-.main-content section {
+.main-content section,
+.footer section {
     border: 1px dotted blue;
     box-sizing: border-box;
 }
