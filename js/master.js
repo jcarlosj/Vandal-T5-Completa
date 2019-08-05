@@ -189,6 +189,7 @@ window .onload = () => {
     let $body = Element .get( 'body' );
     let dom = new DOM( $body );
     
+    /** Crea elementos hijos del 'body': header, main, footer */
     $body = dom .createChildrenElementsBy( $body, html .body );
     $header = $body .children[ 2 ];
     $header = dom .createChildrenElementsBy( $header, html .header );
@@ -197,12 +198,21 @@ window .onload = () => {
     $footer = $body .children[ 0 ];
     $footer = dom .createChildrenElementsBy( $footer, html .footer );
     
+    /** Crea Elementos para el Menú Principal en el 'header-bottom' */
     $navMenuMain = $header .children[ 0 ];
     $navMenuMain = Element .toAnidateElement( $navMenuMain, Element .create( 'ul', [ 'nav', 'main-menu' ], null ) );
     $ulMenuMain = $navMenuMain .children[ 0 ];
     
     $ulMenuMain = dom .createChildrenLiA( $ulMenuMain, data .menu_main, [ [ 'nav-item' ], [ 'nav-link', 'active' ] ] );
-    console .log( 'Atacando', $ulMenuMain );
+    
+    /** Crea Elementos para Cabecera Principal del Sitio en el 'header-top' */
+    let $itemFlex = Element .create( 'div', [ 'd-flex', 'flex-row', 'justify-content-center' ], null );
+    $divHeader = $header .children[ 1 ];    
+    $divHeader = Element .toAnidateElement( $divHeader, $itemFlex );
+    for( let i = 0; i < 5; i ++ ) {
+        $itemFlex = Element .toAnidateElement( $itemFlex, Element .create( 'div', [ 'p-2' ], null ) );
+    }
+    console .log( 'Atacando..', $divHeader );
 
     console .log( $body );
    
